@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A6CC01E2AC0C42F008CDAF9 /* SortStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6CC01D2AC0C42F008CDAF9 /* SortStrategy.swift */; };
 		6A922B2A2ABA7DE700FF8398 /* TODOApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A922B292ABA7DE700FF8398 /* TODOApp.swift */; };
 		6A922B2C2ABA7DE700FF8398 /* TODOListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A922B2B2ABA7DE700FF8398 /* TODOListView.swift */; };
 		6A922B2E2ABA7DE800FF8398 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A922B2D2ABA7DE800FF8398 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6A6CC01D2AC0C42F008CDAF9 /* SortStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortStrategy.swift; sourceTree = "<group>"; };
 		6A922B262ABA7DE700FF8398 /* TODO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TODO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A922B292ABA7DE700FF8398 /* TODOApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODOApp.swift; sourceTree = "<group>"; };
 		6A922B2B2ABA7DE700FF8398 /* TODOListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODOListView.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			children = (
 				6A922B552ABA7EE200FF8398 /* Task.swift */,
 				6A922B5B2ABA8AA800FF8398 /* iOSCheckboxToggleStyle.swift */,
+				6A6CC01D2AC0C42F008CDAF9 /* SortStrategy.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A6CC01E2AC0C42F008CDAF9 /* SortStrategy.swift in Sources */,
 				6A922B5C2ABA8AA800FF8398 /* iOSCheckboxToggleStyle.swift in Sources */,
 				6A922B5E2ABA907600FF8398 /* NewTaskView.swift in Sources */,
 				6A922B2C2ABA7DE700FF8398 /* TODOListView.swift in Sources */,

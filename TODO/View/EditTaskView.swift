@@ -35,6 +35,7 @@ struct EditTaskView: View {
             }
         }
         .task {
+            // cache the previous task name for dismiss btn
             previousTaskName = task.taskName
         }
     }

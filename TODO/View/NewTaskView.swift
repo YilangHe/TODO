@@ -26,7 +26,6 @@ struct NewTaskView: View {
                 
                 Button(action: {
                     print("Add Clicked")
-                    print(taskList)
                     addNewTask(withName: newTaskName, withDueDate: dueDate)
                     newTaskName = ""
                     print(taskList)

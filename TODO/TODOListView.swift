@@ -12,11 +12,29 @@ struct TODOListView: View {
     @State private var isPresentingNewTaskView: Bool = false
     @State private var isPresentingEditTaskView: Bool = false
     @State private var editingTaskIdx: Int = 0
+    @State private var sortStrategy = SortStrategy.sortedByAddedDate
+    
+    private var sortedByDueDateList: [Task] {
+        taskList.sorted {
+            $0.dueDate < $1.dueDate
+        }
+    }
+    
+    private var isSortedByDueDate: Bool {
+        sortStrategy == SortStrategy.sortedByDueDate
+    }
+    
+    private let sortStrategies = SortStrategy.allCases
+    
+    private var actualList: [Task] {
+        isSortedByDueDate ? sortedByDueDateList : taskList
+    }
+    
     var body: some View {
         NavigationStack {
             VStack {
                 Form {
-                    ForEach($taskList) { $task in
+                    ForEach(actualList) { task in
                         TaskCardView(task: task)
                             .swipeActions {
                                 Button(action: {
@@ -46,6 +64,14 @@ struct TODOListView: View {
                     }
                 }
                 .navigationTitle("TODO")
+                .toolbar {
+                    Picker(selection: $sortStrategy, label: Text("Sort")) {
+                        ForEach(sortStrategies, id: \.self) {
+                            Text($0.name)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                }
                 .sheet(isPresented: $isPresentingEditTaskView) {
                     EditTaskView(task: $taskList[editingTaskIdx], isPresentingEditTaskView: $isPresentingEditTaskView)
                 }
