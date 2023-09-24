@@ -10,18 +10,20 @@ import SwiftUI
 struct EditTaskView: View {
     @Binding var task: Task
     @Binding var isPresentingEditTaskView: Bool
+    @State var previousTaskName = ""
+    
     var body: some View {
         NavigationStack {
             Form {
                 Section() {
                     TextField(task.taskName, text: $task.taskName)
                 }
-                
             }
             .navigationTitle("Edit Task")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Dismiss") {
+                        task.taskName = previousTaskName
                         isPresentingEditTaskView = false
                     }
                 }
@@ -32,12 +34,15 @@ struct EditTaskView: View {
                 }
             }
         }
+        .task {
+            previousTaskName = task.taskName
+        }
     }
 }
 
 struct EditView_Previews: PreviewProvider {
     static var previews: some View {
-        var sampleTask = Task.sampleTasks[0]
+        let sampleTask = Task.sampleTasks[0]
         EditTaskView(task: .constant(sampleTask), isPresentingEditTaskView: .constant(true))
     }
 }

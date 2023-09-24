@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NewTaskView: View {
     @State private var newTaskName = ""
+    @State private var dueDate = Date.now
     @State private var showingAlert = false
     @Binding var taskList: [Task]
     var body: some View {
@@ -16,11 +17,17 @@ struct NewTaskView: View {
             Form {
                 Section() {
                     TextField("Task Name", text: $newTaskName)
+                    DatePicker(selection: $dueDate,
+                               in: Date.now...,
+                           displayedComponents: .date) {
+                        Text("Select Due Date")
+                    }
                 }
+                
                 Button(action: {
                     print("Add Clicked")
                     print(taskList)
-                    addNewTask(withName: newTaskName)
+                    addNewTask(withName: newTaskName, withDueDate: dueDate)
                     newTaskName = ""
                     print(taskList)
                 }) {
@@ -30,15 +37,15 @@ struct NewTaskView: View {
                 }
                 .disabled(newTaskName.isEmpty)
                 .alert(isPresented: $showingAlert) {
-                    Alert(title: Text("Success"), message: Text("New Task: {\(newTaskName)} Added"), dismissButton: .default(Text("Done")))
+                    Alert(title: Text("Success"), dismissButton: .default(Text("Done")))
                 }
             }
             .navigationTitle("Create New Task")
         }
     }
-    
-    func addNewTask(withName newTaskName: String) {
-        let newTask = Task(taskName: newTaskName)
+     
+    func addNewTask(withName newTaskName: String, withDueDate dueDate: Date) {
+        let newTask = Task(taskName: newTaskName, dueDate: dueDate)
         taskList.append(newTask)
         showingAlert = true
     }
@@ -46,7 +53,7 @@ struct NewTaskView: View {
 
 struct NewTaskView_Previews: PreviewProvider {
     static var previews: some View {
-        var taskList = Task.sampleTasks
+        let taskList = Task.sampleTasks
         
         NewTaskView(taskList: .constant(taskList))
     }

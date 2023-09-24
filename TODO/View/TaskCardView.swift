@@ -11,16 +11,21 @@ struct TaskCardView: View {
     var task: Task
     @State var isOn: Bool = false
     var body: some View {
-        HStack {
+        HStack(alignment: .top) {
             Button(action: {
                 isOn.toggle()
             }, label: {
                 Image(systemName: isOn ? "checkmark.circle.fill" : "circle")
             })
-            Text(task.taskName)
-                .font(.title2)
-                .foregroundColor(isOn ? .gray : .blue)
+            .offset(y: 5)
+            VStack(alignment: .leading) {
+                Text(task.taskName)
+                    .font(.title2)
+                    .foregroundColor(isOn ? .gray : .blue)
                 .strikethrough(isOn)
+                Text("Due Date: \(task.dueDate.formatted(date: .long, time: .omitted))")
+                    .foregroundColor(.gray)
+            }
             Spacer()
         }
         .padding()
