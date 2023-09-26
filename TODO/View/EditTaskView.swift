@@ -11,12 +11,18 @@ struct EditTaskView: View {
     @Binding var task: Task
     @Binding var isPresentingEditTaskView: Bool
     @State var previousTaskName = ""
+    @State var previousDueDate = Date.now
     
     var body: some View {
         NavigationStack {
             Form {
                 Section() {
                     TextField(task.taskName, text: $task.taskName)
+                    DatePicker(selection: $task.dueDate,
+                               in: Date.now...,
+                           displayedComponents: .date) {
+                        Text("Select Due Date")
+                    }
                 }
             }
             .navigationTitle("Edit Task")
@@ -24,6 +30,7 @@ struct EditTaskView: View {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Dismiss") {
                         task.taskName = previousTaskName
+                        task.dueDate = previousDueDate
                         isPresentingEditTaskView = false
                     }
                 }
@@ -37,6 +44,8 @@ struct EditTaskView: View {
         .task {
             // cache the previous task name for dismiss btn
             previousTaskName = task.taskName
+            
+            previousDueDate = task.dueDate
         }
     }
 }

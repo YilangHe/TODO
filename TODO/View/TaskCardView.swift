@@ -19,10 +19,22 @@ struct TaskCardView: View {
             })
             .offset(y: 5)
             VStack(alignment: .leading) {
-                Text(task.taskName)
-                    .font(.title2)
-                    .foregroundColor(isOn ? .gray : .blue)
-                .strikethrough(isOn)
+                HStack {
+                    Text(task.taskName)
+                        .font(.title2)
+                        .foregroundColor(isOn ? .gray : .blue)
+                    .strikethrough(isOn)
+                
+                    ScrollView(.horizontal) {
+                        HStack(spacing: 10) {
+                            ForEach(task.tags) { tag in
+                                TagView(tag: tag)
+                            }
+                        }
+                    }
+                    .scaleEffect(0.8)
+                    .offset(x:20)
+                }
                 Text("Due Date: \(task.dueDate.formatted(date: .long, time: .omitted))")
                     .foregroundColor(.gray)
             }
